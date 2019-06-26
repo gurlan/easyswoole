@@ -26,5 +26,15 @@ return [
     'LOG_DIR' => null,
     'PHAR' => [
         'EXCLUDE' => ['.idea', 'Log', 'Temp', 'easyswoole', 'easyswoole.install']
-    ]
+    ],
+    'MYSQL'         => [
+        'host'                 => '106.12.199.28',
+        'port'                 => 3306,
+        'user'                 => 'root',
+        'password'             => 'qi&YyPatY2D7',
+        'database'             => 'easyswoole',
+        'timeout'              => 30,
+        'charset'              => 'utf8mb4',
+        'connect_timeout'      => '5',//连接超时时间
+    ],
 ];
