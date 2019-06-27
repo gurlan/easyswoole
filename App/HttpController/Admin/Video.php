@@ -14,9 +14,15 @@ use App\Service\Oss;
 class Video extends BaseController
 {
 
-    function index()
+
+    /**
+     * 列表页
+     */
+    public function index()
     {
-        return $this->render('Video/index');
+        $table_name = 'video';
+        $list = $this->db->orderBy('id', 'desc')->get($table_name);
+        return $this->render('Video/index', array('list' => $list));
     }
 
 
@@ -33,18 +39,19 @@ class Video extends BaseController
         $video = $request->getUploadedFile('video');//获取一个上传文件,返回的是一个\EasySwoole\Http\Message\UploadFile的对象
 
         try {
-            $file = '/var/www/code/Temp/'.$video->getClientFilename();
-            $video->moveTo($file,$video->getStream());
-            $res = Oss::getInstance()->upload($video->getClientFilename(),$file);
+            $file = '/var/www/code/static/video/' . $video->getClientFilename();
+            $video->moveTo($file, $video->getStream());
+           // $res = Oss::getInstance()->upload($video->getClientFilename(), $file);
             $data = $request->getRequestParam();
             $row['name'] = $data['name'];
-            $row['url'] = $res['oss-request-url'];
-            $this->db->insert('video',$row);
-            unlink($file);
+            $row['url'] = 'http://www.gitlay.com/static/video/'.$video->getClientFilename();
+            $this->db->insert('video', $row);
             return $this->response()->redirect("/admin/video");
         } catch (\Exception $exception) {
-            echo $exception->getMessage();
+            $this->response()->withHeader('Content-type', 'text/html;charset=utf-8');
+            $this->response()->write($exception->getMessage());
         }
-
     }
+
+
 }

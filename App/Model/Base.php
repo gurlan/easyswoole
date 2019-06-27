@@ -14,4 +14,7 @@ Class Base{
     {
         $this->db = \EasySwoole\MysqliPool\Mysql::getInstance()->pool('mysql')->getObj();
     }
+
+
+
 }
