@@ -7,16 +7,15 @@
  */
 namespace App\HttpController\Admin;
 
+use App\HttpController\BaseController;
 
-use EasySwoole\Http\AbstractInterface\Controller;
 
-class Index extends Controller
+class Index extends BaseController
 {
 
     function index()
     {
-
-        return   $this->response()->write('111');
+        return  $this->render('Index/index');
 
     }
 }

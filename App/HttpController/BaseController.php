@@ -3,11 +3,12 @@
 namespace App\HttpController;
 
 use EasySwoole\EasySwoole\Config;
-use EasySwoole\Http\AbstractInterface\Controller;
+
 
 use EasySwoole\Http\Request;
 use EasySwoole\Http\Response;
 use duncan3dc\Laravel\BladeInstance;
+use EasySwoole\MysqliPool\Mysql;
 
 /**
  * 视图控制器
@@ -15,9 +16,10 @@ use duncan3dc\Laravel\BladeInstance;
  * @author  : evalor <master@evalor.cn>
  * @package App
  */
-abstract class ViewController extends Controller
+ class BaseController extends SessionController
 {
     protected $view;
+    protected $db;
 
     /**
      * 初始化模板引擎
@@ -28,10 +30,12 @@ abstract class ViewController extends Controller
      */
     function __construct()
     {
+
         $tempPath   = Config::getInstance()->getConf('TEMP_DIR');    # 临时文件目录
         $this->view = new BladeInstance(EASYSWOOLE_ROOT . '/Views', "{$tempPath}/templates_c");
-
+        $this->db = Mysql::getInstance()->pool('mysql')->getObj();
         parent::__construct();
+
     }
 
     /**

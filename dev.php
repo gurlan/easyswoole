@@ -37,4 +37,9 @@ return [
         'charset'              => 'utf8mb4',
         'connect_timeout'      => '5',//连接超时时间
     ],
+    'OSS' =>[
+        'key' =>'LTAIv27muzQBHGxS',
+        'secret' =>'yPgLNaQFppm2DM4dbZklJjjoOpv7DK',
+        'bucket'=>'test20181017'
+    ]
 ];
