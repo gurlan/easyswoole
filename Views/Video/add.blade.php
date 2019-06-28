@@ -17,8 +17,15 @@
 
 
                             <div class="form-group">
-                                <label for="exampleInputFile">文件</label>
-                                <input type="file" id="exampleInputFile" name="video">
+                                <label for="exampleInputFile">封面</label>
+                                <input type="file" id="" name="image">
+                                <p class="help-block">上传文件</p>
+                            </div>
+
+
+                            <div class="form-group">
+                                <label for="exampleInputFile">视频</label>
+                                <input type="file" id="" name="video">
                                 <p class="help-block">上传文件</p>
                             </div>
 

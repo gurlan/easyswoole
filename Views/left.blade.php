@@ -2,16 +2,12 @@
     <div class="sidebar-nav navbar-collapse">
         <ul class="nav" id="side-menu">
             <li>
-                <a href="admin/index"><i class="fa fa-dashboard fa-fw nav_icon"></i>控制台</a>
+                <a href="/admin/index"><i class="fa fa-dashboard fa-fw nav_icon"></i>控制台</a>
             </li>
             <li>
-                <a href="#"><i class="fa fa-laptop nav_icon"></i>Layouts<span class="fa arrow"></span></a>
-                <ul class="nav nav-second-level">
-                    <li>
-                        <a href="grids.html">Grid System</a>
-                    </li>
-                </ul>
-                <!-- /.nav-second-level -->
+                <a href="/admin/video"><i class="fa fa-laptop nav_icon"></i>视频<span class="fa arrow"></span></a>
+
+
             </li>
             <li>
                 <a href="#"><i class="fa fa-indent nav_icon"></i>Menu Levels<span class="fa arrow"></span></a>

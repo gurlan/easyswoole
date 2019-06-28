@@ -124,7 +124,9 @@
                         <tr>
                             <th>#</th>
                             <th>NAME</th>
+                            <th>IMAGE</th>
                             <th>URL</th>
+                            <th>OPERATE</th>
                         </tr>
                         </thead>
                         <tbody>
@@ -132,7 +134,9 @@
                         <tr>
                             <th scope="row">{{$v['id']}}</th>
                             <td>{{$v['name']}}</td>
-                            <td> {{$v['url']}}</td>
+                            <td><img src="{{$v['image']}}" style="width: 100px"/> </td>
+                            <td>{{$v['url']}}</td>
+                            <td><a href="/admin/video/del?id={{$v['id']}}">删除</a></td>
                         </tr>
                         @endforeach
                         </tbody>
