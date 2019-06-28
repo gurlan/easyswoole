@@ -41,5 +41,10 @@ return [
         'key' =>'LTAIv27muzQBHGxS',
         'secret' =>'yPgLNaQFppm2DM4dbZklJjjoOpv7DK',
         'bucket'=>'test20181017'
+    ],
+    'WEIXIN' =>[
+        'appid'=>'wxcecf234ee62295c6',
+        'secret'=>'790b4f6b77e612a4a4e28da89eb0dd80'
     ]
+
 ];

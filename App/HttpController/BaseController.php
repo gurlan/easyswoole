@@ -49,4 +49,13 @@ use EasySwoole\MysqliPool\Mysql;
         $content = $this->view->render($view, $params);
         $this->response()->write($content);
     }
-}
+
+    public function onRequest(?string $action): ?bool
+    {
+        $header = $this->request()->getHeaders();
+
+      //  $openid = $header['$header'];
+        return true;
+
+    }
+ }
