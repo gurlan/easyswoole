@@ -7,12 +7,14 @@
  */
 namespace  App\Model;
 
+use App\Utility\Pool\MysqlPool;
+
 Class Base{
 
     protected  $db;
     public function __construct()
     {
-        $this->db = \EasySwoole\MysqliPool\Mysql::getInstance()->pool('mysql')->getObj();
+        $this->db =  MysqlPool::defer();
     }
 
 

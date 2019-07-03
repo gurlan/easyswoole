@@ -25,7 +25,7 @@ class Login extends BaseController
         $url.=$query;
         $res = file_get_contents($url);
         $user_info = json_decode($res,true);
-        $this->writeJson(200,$user_info);
+        $open_id = $user_info['open_id'];
 
     }
 
