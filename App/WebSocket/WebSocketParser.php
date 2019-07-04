@@ -35,8 +35,11 @@ class WebSocketParser implements ParserInterface
     {
 
 
+
         // 解析 客户端原始消息
-        $data = json_decode($raw, true);
+        $data = explode(',',$raw);
+
+      //  var_dump($data);
         if (!is_array($data)) {
             echo "decode message error! \n";
             return null;
@@ -61,9 +64,9 @@ class WebSocketParser implements ParserInterface
         // 设置被调用的方法
         $caller->setAction($data['action'] ?? 'index');
         // 检查是否存在args
-        if (!empty($data['content'])) {
+        if (!empty($data['1'])) {
             // content 无法解析为array 时 返回 content => string 格式
-            $args = is_array($data['content']) ? $data['content'] : ['content' => $data['content']];
+            $args = is_array($data[1]) ? $data[1] : ['content' => $data[1],'id'=>$data[0]];
         }
 
         // 设置被调用的Args

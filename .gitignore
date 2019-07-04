@@ -9,8 +9,8 @@ composer.lock
 /Log/
 /Temp/
 /Config.php
-/easyswoole
+easyswoole
 easyswoole.install
 src/swoole_log.txt
-/EasySwooleEvent.php
+EasySwooleEvent.php
 

@@ -2,6 +2,7 @@
 
 namespace App\HttpController;
 
+use App\Model\User;
 use EasySwoole\EasySwoole\Config;
 
 
@@ -21,6 +22,7 @@ use App\Utility\Pool\MysqlPool;
 {
     protected $view;
     protected $db;
+    protected $userModel;
 
     /**
      * 初始化模板引擎
@@ -35,6 +37,7 @@ use App\Utility\Pool\MysqlPool;
         $tempPath   = Config::getInstance()->getConf('TEMP_DIR');    # 临时文件目录
         $this->view = new BladeInstance(EASYSWOOLE_ROOT . '/Views', "{$tempPath}/templates_c");
         $this->db =  MysqlPool::defer();
+        $this->userModel = new User();
         parent::__construct();
 
     }
@@ -53,9 +56,7 @@ use App\Utility\Pool\MysqlPool;
 
     public function onRequest(?string $action): ?bool
     {
-        $header = $this->request()->getHeaders();
 
-      //  $openid = $header['$header'];
         return true;
 
     }

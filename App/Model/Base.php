@@ -17,6 +17,9 @@ Class Base{
         $this->db =  MysqlPool::defer();
     }
 
+    public function getDetailByKey($key,$val){
+       return $this->db->where($key,$val)->getOne($this->tableName);
+    }
 
 
 }

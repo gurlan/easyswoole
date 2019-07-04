@@ -23,6 +23,7 @@ use EasySwoole\Mysqli\Config;
 use App\Utility\Pool\MysqlPool;
 use EasySwoole\Socket\Dispatcher;
 use App\WebSocket\WebSocketParser;
+use EasySwoole\FastCache\Cache;
 
 class EasySwooleEvent implements Event
 {
@@ -56,7 +57,6 @@ class EasySwooleEvent implements Event
         // 创建一个 Dispatcher 配置
         $conf = new \EasySwoole\Socket\Config();
 
-
         // 设置 Dispatcher 为 WebSocket 模式
         $conf->setType(\EasySwoole\Socket\Config::WEB_SOCKET);
         // 设置解析器对象
@@ -69,6 +69,10 @@ class EasySwooleEvent implements Event
             $dispatch->dispatch($server, $frame->data, $frame);
         });
 
+        /**
+         * **************** 缓存 **********************
+         */
+        Cache::getInstance()->setTempDir(EASYSWOOLE_TEMP_DIR)->attachToServer(ServerManager::getInstance()->getSwooleServer());
     }
 
     public static function onRequest(Request $request, Response $response): bool
