@@ -38,21 +38,30 @@ class Index extends Controller
             Cache::getInstance()->set('video_' . $id, $fd_array);
         }
 
-      $fd_array = Cache::getInstance()->get('video_' . $id);
+        $fd_array = Cache::getInstance()->get('video_' . $id);
 
-      $content =  $this->caller()->getArgs()['content'];
+        $content = $this->caller()->getArgs()['content'];
         // 异步推送, 这里直接 use fd也是可以的
-        TaskManager::async(function () use ($fd_array,$content) {
+        TaskManager::async(function () use ($fd_array, $content, $id) {
             $server = ServerManager::getInstance()->getSwooleServer();
             $i = 0;
+            $new_fd_array = array();
             foreach ($fd_array as $v) {
-               // sleep(1);
-                $server->push($v, $content.'push in http at ' . date('H:i:s'));
+                // sleep(1);
+
+                try {
+                    $server->push($v, $content . 'push in http at ' . date('H:i:s'));
+                    $new_fd_array[] = $v;
+                } catch (\Exception $exception) {
+
+                }
                 $i++;
             }
+            Cache::getInstance()->set('video_' . $id, $new_fd_array);
         });
 
-      //  $this->response()->setMessage($this->caller()->getArgs()['content']);
+        var_dump(Cache::getInstance()->get('video_' . $id));
+        //  $this->response()->setMessage($this->caller()->getArgs()['content']);
     }
 
     function hello()

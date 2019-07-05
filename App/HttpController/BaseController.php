@@ -2,6 +2,7 @@
 
 namespace App\HttpController;
 
+use App\Model\Comment;
 use App\Model\User;
 use EasySwoole\EasySwoole\Config;
 
@@ -23,7 +24,7 @@ use App\Utility\Pool\MysqlPool;
     protected $view;
     protected $db;
     protected $userModel;
-
+     protected $commentModel;
     /**
      * 初始化模板引擎
      * ViewController constructor.
@@ -38,6 +39,7 @@ use App\Utility\Pool\MysqlPool;
         $this->view = new BladeInstance(EASYSWOOLE_ROOT . '/Views', "{$tempPath}/templates_c");
         $this->db =  MysqlPool::defer();
         $this->userModel = new User();
+        $this->commentModel = new Comment();
         parent::__construct();
 
     }
