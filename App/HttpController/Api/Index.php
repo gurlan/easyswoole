@@ -38,7 +38,7 @@ class Index extends BaseController
         $page_size = $page_size ? $page_size : 1;
         $list = $this->db->orderBy('id', 'desc')->get($table_name, [($page - 1) * $page_size, $page_size]);
         foreach ($list as $k => $v) {
-            $comment = $this->commentModel->getCommentList($v['id']);
+            $comment = $this->commentModel->getCommentList($v['id']); //取得评论列表
             $danmu = array();
 
             foreach ($comment as $key => $val) {
@@ -46,9 +46,10 @@ class Index extends BaseController
                 $danmu[$key]['color'] = '#' . $this->randColor();
                 $danmu[$key]['time'] = $val['videoTime'];
             }
-            $list[$k]['comment'] = $danmu;
+            $list[$k]['comment'] = $danmu; //前台弹幕
             $list[$k]['commnetnum'] = count($comment);
             $list[$k]['isLike'] = 0;
+            //是否点过赞
             if ($this->db->where('video_id',$v['id'])->where('user_id',$this->user['id'])->getOne('love')){
                 $list[$k]['isLike'] = 1;
             }
@@ -83,7 +84,7 @@ class Index extends BaseController
             $db->insert('love', $data);
             return true;
         }, function () {
-            echo "异步任务执行完毕...\n";
+            echo "异步点赞成功...\n";
         });
 
         $this->writeJson(200, 1, '成功');

@@ -55,6 +55,7 @@ class Auth extends BaseController
         $weixin = new WechatCrypt($appid, $sessionKey);
         $encryptedData = $raw_array['encryptedData'];
         $iv = $raw_array['iv'];
+
         try{
             $errCode = $weixin->decryptData($encryptedData, $iv, $data );
             if ($errCode == 0) {
@@ -68,7 +69,8 @@ class Auth extends BaseController
                     return    $this->writeJson(200,['openid'=>$row['openid']],'注册成功');
                 }
                 return     $this->writeJson(200,['openid'=>$row['openid']],'注册成功');
-
+            }else{
+                return     $this->writeJson(100401,'','session失效');
             }
         }catch (\Exception $exception){
          var_dump($exception->getMessage());

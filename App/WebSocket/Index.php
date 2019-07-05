@@ -37,7 +37,7 @@ class Index extends Controller
             $fd_array[] = $fd;
             Cache::getInstance()->set('video_' . $id, $fd_array);
         }
-
+        //将当前视频的socket链接放入缓存
         $fd_array = Cache::getInstance()->get('video_' . $id);
 
         $content = $this->caller()->getArgs()['content'];
@@ -46,20 +46,20 @@ class Index extends Controller
             $server = ServerManager::getInstance()->getSwooleServer();
             $i = 0;
             $new_fd_array = array();
+            //异步socket
             foreach ($fd_array as $v) {
-                // sleep(1);
-
                 try {
-                    $server->push($v, $content . 'push in http at ' . date('H:i:s'));
+                    $server->push($v, $content);
                     $new_fd_array[] = $v;
                 } catch (\Exception $exception) {
 
                 }
                 $i++;
             }
+            //更新维护缓存里的socket
             Cache::getInstance()->set('video_' . $id, $new_fd_array);
         });
-
+        //打印socket链接
         var_dump(Cache::getInstance()->get('video_' . $id));
         //  $this->response()->setMessage($this->caller()->getArgs()['content']);
     }
